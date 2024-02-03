@@ -17,6 +17,7 @@ public class TestConfig implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		//SEED
 		
 		User user1 = new User(1L, "Alex", "9999999", "alex@test.com", "123admin");
 		User user2 = new User(2L, "Bob", "999999877", "bob@test.com", "123admin");
