@@ -99,6 +99,16 @@ public class Order implements Serializable {
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
+	
+	public double getTotal() {
+		double sum = 0.0;
+		
+		for(OrderItem item : items) {
+			sum += item.getSubTotal();
+		}
+		
+		return sum;
+	}
 
 	@Override
 	public int hashCode() {
