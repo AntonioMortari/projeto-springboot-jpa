@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.course.course.entitites.User;
 import com.course.course.repositories.UserRepository;
+import com.course.course.services.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -21,10 +22,11 @@ public class UserService {
 		return repository.findAll();
 	}
 	
-	public Optional<User> findOne(Long id) {
-		Optional<User> user = repository.findById(id);
-		
+	public User findOne(Long id) {
+		User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 		return user;
+		
+		
 	}
 	
 	public User insert(User obj) {
