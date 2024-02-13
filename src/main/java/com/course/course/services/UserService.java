@@ -38,16 +38,23 @@ public class UserService {
 			findOne(id);
 			repository.deleteById(id);
 		}catch(ResourceNotFoundException e) {	
-			throw new ResourceNotFoundException(e.getMessage());
+			throw new ResourceNotFoundException(id);
 		}catch(DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
 	
 	public User update(Long id, User obj) {
-		User entity = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			User entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
+		
+		
 	}
 	
 	public void updateData(User entity, User obj) {
