@@ -11,6 +11,7 @@
 - Maven
 - JPA
 - Hibernate
+- H2
 
 <h2 id="started">🚀 Instalando o Projeto</h2>
 
